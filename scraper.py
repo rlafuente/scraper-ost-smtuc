@@ -21,7 +21,11 @@ i = 1
 
 def scrape(local=False):
     if not local:
+        print "Generating SQLite output from the OST.pt API..."
         generate_db_from_api(API_URL)
+        # make sure the DB name conforms to morph.io
+        if os.path.exists('scraperwiki.sqlite') and not os.path.exists('data.sqlite'):
+            os.rename('scraperwiki.sqlite', 'data.sqlite')
     else:
         generate_db_from_files()
 
@@ -39,11 +43,9 @@ def data2sqlite(data):
                                                           })
 
 def generate_db_from_api(url, save_json_files=False):
-    print "Generating SQLite output from the OST.pt API..."
     global i
     response = urllib2.urlopen(url)
     r = response.read()
-    r = open(file, 'r').read()
     data = json.loads(r)
     data2sqlite(data)
 
@@ -59,9 +61,8 @@ def generate_db_from_api(url, save_json_files=False):
     if not data['Meta'].get('next_page'):
         return
     next_url = API_URL_BASE + data['Meta']['next_page']
-    fetch_page(next_url)
-    if os.path.exists('scraperwiki.sqlite') and not os.path.exists('data.sqlite'):
-        os.rename('scraperwiki.sqlite', 'data.sqlite')
+    print next_url
+    generate_db_from_api(next_url)
 
 def generate_db_from_files():
     print "Generating SQLite output from downloaded files..."
