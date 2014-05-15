@@ -60,6 +60,8 @@ def generate_db_from_api(url, save_json_files=False):
         return
     next_url = API_URL_BASE + data['Meta']['next_page']
     fetch_page(next_url)
+    if os.path.exists('scraperwiki.sqlite') and not os.path.exists('data.sqlite'):
+        os.rename('scraperwiki.sqlite', 'data.sqlite')
 
 def generate_db_from_files():
     print "Generating SQLite output from downloaded files..."
