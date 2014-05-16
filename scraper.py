@@ -11,8 +11,7 @@ import scraperwiki
 
 API_RESOURCE = "stops"
 AGENCY_ID = 8 # SMTUC
-# API_KEY = "bgcrnEOQXmPHpERnWpyoqExCpjPItNBGnKikJQBo"
-API_KEY = "JaNPGAEzmpMrXBraNnfvcGRuKTKaMAgIygKBGKTD"
+API_KEY = "___REMOVED___"
 API_URL_BASE = 'https://api.ost.pt'
 API_URL = '%s/%s/?agency=%d&withroutes=false&key=%s' % (API_URL_BASE, API_RESOURCE, AGENCY_ID, API_KEY)
 
