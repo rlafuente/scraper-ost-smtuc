@@ -11,11 +11,12 @@ import scraperwiki
 
 API_RESOURCE = "stops"
 AGENCY_ID = 8 # SMTUC
-API_KEY = "___REMOVED___"
+API_KEY = os.environ["MORPH_OST_API_KEY"]
 API_URL_BASE = 'https://api.ost.pt'
 API_URL = '%s/%s/?agency=%d&withroutes=false&key=%s' % (API_URL_BASE, API_RESOURCE, AGENCY_ID, API_KEY)
 
 os.environ["SCRAPERWIKI_DATABASE_NAME"] = "data.sqlite"
+
 i = 1
 
 def scrape(local=False):
