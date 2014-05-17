@@ -44,6 +44,7 @@ def data2sqlite(data):
 
 def generate_db_from_api(url, save_json_files=False):
     global i
+    print "Downloading page %d..." % i
     response = urllib2.urlopen(url)
     r = response.read()
     data = json.loads(r)
@@ -61,7 +62,7 @@ def generate_db_from_api(url, save_json_files=False):
     if not data['Meta'].get('next_page'):
         return
     next_url = API_URL_BASE + data['Meta']['next_page']
-    print next_url
+    # print next_url
     generate_db_from_api(next_url)
 
 def generate_db_from_files():
@@ -72,7 +73,7 @@ def generate_db_from_files():
         r = open(f, 'r').read()
         data = json.loads(r)
         data2sqlite(data)
-        print f
+        
 
 scrape()
 # scrape(local=True)
